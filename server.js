@@ -20,6 +20,16 @@ app.get("/", (req, res) => {
   res.send("Restaurant API Running");
 });
 
+app.get("/test-db", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT 1");
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const PORT =
   process.env.PORT || 3000;
 
