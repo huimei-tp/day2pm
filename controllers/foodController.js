@@ -8,8 +8,13 @@ exports.getFoods = async (req, res) => {
 
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  console.error(err);
+
+  res.status(500).json({
+    error: err.message,
+    stack: err.stack
+  });
+}
 };
 
 exports.createFood = async (req, res) => {
